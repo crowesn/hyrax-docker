@@ -16,9 +16,9 @@ RUN apt-get update && \
     libreoffice
 
 # Fixes: https://unix.stackexchange.com/q/342403
-RUN apt-get install -y --no-install-recommends \
-    openjdk-8-jre-headless \
-    ca-certificates-java
+# RUN apt-get install -y --no-install-recommends \
+#    openjdk-8-jre-headless \
+#    ca-certificates-java
 
 # Install Harvard's FITS tool
 ENV FITS_VERSION 1.0.5
