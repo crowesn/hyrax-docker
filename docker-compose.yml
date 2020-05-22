@@ -14,8 +14,6 @@ services:
       - redis
       - fcrepo
       - solr
-      - cas
-      - ldap
     environment:
       RAILS_ENV: development
       HYRAX_DB_HOST: db
@@ -83,18 +81,6 @@ services:
       - fcrepo_db
     volumes:
       - fcrepo:/opt/fcrepo/data
-  cas:
-    build: docker/cas
-    ports:
-      - "8443:8443"
-      - "8080:8080"
-    depends_on:
-      - ldap
-  ldap:
-    build: docker/ldap
-    ports:
-      - "389:389"
-      - "636:636"
 volumes:
   fcrepo:
   fcrepo_db:
