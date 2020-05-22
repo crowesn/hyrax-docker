@@ -1,6 +1,4 @@
-FROM ruby:2.3.1
-
-RUN echo "deb http://ftp.debian.org/debian jessie-backports main" >> /etc/apt/sources.list
+FROM ruby:2.6.6
 
 RUN apt-get update && \
   apt-get install -y --no-install-recommends \
@@ -18,7 +16,7 @@ RUN apt-get update && \
     libreoffice
 
 # Fixes: https://unix.stackexchange.com/q/342403
-RUN apt-get install -y --no-install-recommends -t jessie-backports \
+RUN apt-get install -y --no-install-recommends \
     openjdk-8-jre-headless \
     ca-certificates-java
 
