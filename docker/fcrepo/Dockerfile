@@ -10,7 +10,7 @@ RUN mkdir -p ${FCREPO_HOME}
 VOLUME ${FCREPO_HOME}
 
 # Download the Fedora WAR.
-RUN curl -L http://repo1.maven.org/maven2/org/fcrepo/fcrepo-webapp/${FCREPO_VERSION}/fcrepo-webapp-${FCREPO_VERSION}.war > ${CATALINA_HOME}/webapps/fcrepo.war
+RUN curl -L https://repo1.maven.org/maven2/org/fcrepo/fcrepo-webapp/${FCREPO_VERSION}/fcrepo-webapp-${FCREPO_VERSION}.war > ${CATALINA_HOME}/webapps/fcrepo.war
 
 # Copy the Server config.
 COPY conf/server.xml ${CATALINA_HOME}/conf/server.xml
