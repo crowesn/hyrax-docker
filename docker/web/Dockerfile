@@ -1,19 +1,21 @@
-FROM ruby:2.6.6
+FROM centos/ruby-26-centos7
+RUN whoami
+USER root
 
-RUN apt-get update && \
-  apt-get install -y --no-install-recommends \
-    postgresql-client \
+RUN yum update -y && \
+    yum install -y \
     redis-tools \
     nodejs \
     unzip \
-    postgresql \
     ghostscript \
     libmagickcore-dev \
     mediainfo \
     clamav \
     libclamav-dev \
     ffmpeg \
-    libreoffice
+    libreoffice \
+    java-1.8.0-openjdk \
+    java-1.8.0-openjdk-devel 
 
 # Fixes: https://unix.stackexchange.com/q/342403
 # RUN apt-get install -y --no-install-recommends \

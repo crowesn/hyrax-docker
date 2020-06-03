@@ -10,17 +10,20 @@ wait_seconds=${WAIT_SECONDS:-5}
 
 if [ "$1" = 'server' ]; then
     # Wait for the Database
-    echo "Checking Database Connectivity"
-    if ! /scripts/wait-for.sh "db" "$max_try" "$wait_seconds"; then
-        echo "Unable to connect to the database."
-        exit 1
-    fi
+    # echo "Checking Database Connectivity"
+    # if ! /scripts/wait-for.sh "db" "$max_try" "$wait_seconds"; then
+    #     echo "Unable to connect to the database."
+    #     exit 1
+    # fi
 
     if [ -f /opt/hyrax/tmp/pids/server.pid ]; then
         echo "Stopping Rails Server and Removing PID File"
         ps aux |grep -i [r]ails | awk '{print $2}' | xargs kill -9
         rm -rf /opt/hyrax/tmp/pids/server.pid
     fi
+
+    echo "Install bundler"
+    gem install bundler:2.0.2
 
     echo "Checking and Installing Ruby Gems"
     bundle check || bundle install
@@ -54,6 +57,9 @@ elif [[ $1 = sidekiq* ]]; then
         echo "Unable to connect to the rails server."
         exit 1
     fi
+
+    echo "Install bundler"
+    gem install bundler:2.0.2
 
     echo "Checking and Installing Ruby Gems"
     bundle check || bundle install
