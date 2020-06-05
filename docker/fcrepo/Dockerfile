@@ -14,8 +14,9 @@ RUN curl -L https://repo1.maven.org/maven2/org/fcrepo/fcrepo-webapp/${FCREPO_VER
 
 # Copy the Server config.
 COPY conf/server.xml ${CATALINA_HOME}/conf/server.xml
+COPY conf/repository.json ${CATALINA_HOME}/conf/repository.json
 
 # Set Java options for Tomcat and Fedora.
-ENV JAVA_OPTS='-Dfcrepo.home=${FCREPO_HOME} -Djava.awt.headless=true -Dfile.encoding=UTF-8 -server -Xms512m -Xmx1024m -XX:NewSize=256m -XX:MaxNewSize=256m -XX:MetaspaceSize=256m -XX:MaxMetaspaceSize=256m -XX:+DisableExplicitGC -Dfcrepo.modeshape.configuration=classpath:/config/jdbc-postgresql/repository.json -Dfcrepo.postgresql.host=fcrepo_db -Dfcrepo.postgresql.port=5432 -Dfcrepo.postgresql.username=root -Dfcrepo.postgresql.password=root'
+ENV JAVA_OPTS='-Dfcrepo.home=${FCREPO_HOME} -Dfcrepo.modeshape.configuration=file:${CATALINA_HOME}/conf/repository.json -Dfcrepo.mysql.host=fcrepo_db -Dfcrepo.mysql.port=3306 -Dfcrepo.mysql.username=root -Dfcrepo.mysql.password=root'
 
 EXPOSE 8984
