@@ -1,4 +1,4 @@
-version: '2'
+version: '2.1'
 services:
   web:
     build: docker/web
@@ -43,15 +43,21 @@ services:
     volumes:
       - pgdata:/var/lib/postgresql/data
   fcrepo_db:
-    image: postgres
+    image: mysql:5
     ports:
-      - "5434:5432"
+      - "3306:3306"
+    command: mysqld --default-authentication-plugin=mysql_native_password
     environment:
-      POSTGRES_PASSWORD: root
-      POSTGRES_USER: root
-      POSTGRES_DB: fcrepo
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_PASSWORD: root
+      MYSQL_DATABASE: fcrepo
     volumes:
-      - fcrepo_db:/var/lib/postgresql/data
+      - fcrepo_db:/var/lib/mysql
+    healthcheck:
+      test: mysql -h fcrepo_db -u root --password=root fcrepo --execute "SHOW DATABASES;"
+      interval: 30s
+      timeout: 30s
+      retries: 5
   db_test:
     image: postgres
     ports:
@@ -78,7 +84,8 @@ services:
     ports:
       - "8984:8984"
     depends_on:
-      - fcrepo_db
+      fcrepo_db:
+        condition: service_healthy
     volumes:
       - fcrepo:/opt/fcrepo/data
 volumes:
