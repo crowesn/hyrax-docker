@@ -4,7 +4,8 @@ USER root
 
 RUN yum update -y && \
     yum install -y \
-    redis-tools \
+    redis \
+    mysql \
     nodejs \
     unzip \
     ghostscript \

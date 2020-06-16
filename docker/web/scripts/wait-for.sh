@@ -16,7 +16,7 @@ function usage {
 
 service=$1
 if [[ $service == "db" ]]; then
-  service_command="pg_isready -h $HYRAX_DB_HOST"
+  service_command="mysql -h $HYRAX_DB_HOST -u root --password=root hyrax --execute \"SHOW DATABASES;\""
 elif [[ $service == "rails" ]]; then
   service_command="curl -fkI $HYRAX_URL"
 elif [[ $service == "redis" ]]; then

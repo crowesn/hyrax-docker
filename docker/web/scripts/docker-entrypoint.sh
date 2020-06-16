@@ -10,11 +10,11 @@ wait_seconds=${WAIT_SECONDS:-5}
 
 if [ "$1" = 'server' ]; then
     # Wait for the Database
-    # echo "Checking Database Connectivity"
-    # if ! /scripts/wait-for.sh "db" "$max_try" "$wait_seconds"; then
-    #     echo "Unable to connect to the database."
-    #     exit 1
-    # fi
+    echo "Checking Database Connectivity"
+      if ! /scripts/wait-for.sh "db" "$max_try" "$wait_seconds"; then
+        echo "Unable to connect to the database."
+        exit 1
+    fi
 
     if [ -f /opt/hyrax/tmp/pids/server.pid ]; then
         echo "Stopping Rails Server and Removing PID File"
