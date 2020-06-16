@@ -2,6 +2,7 @@ FROM centos/ruby-26-centos7
 RUN whoami
 USER root
 
+RUN yum install epel-release -y
 RUN yum update -y && \
     yum install -y \
     redis \

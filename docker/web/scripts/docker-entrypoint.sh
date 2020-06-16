@@ -5,7 +5,7 @@ if [[ "$VERBOSE" = "yes" ]]; then
     set -x
 fi
 
-max_try=${WAIT_MAX_TRY:-12}
+max_try=${WAIT_MAX_TRY:-20}
 wait_seconds=${WAIT_SECONDS:-5}
 
 if [ "$1" = 'server' ]; then
