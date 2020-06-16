@@ -9,11 +9,11 @@ services:
       - ..:/opt/hyrax
       - gems:/opt/bundle
     depends_on:
-      - db
       - db_test
       - redis
       - fcrepo
       - solr
+      - db
     environment:
       RAILS_ENV: development
       HYRAX_DB_HOST: db
@@ -33,15 +33,16 @@ services:
       QUEUE: "*"
     command: sidekiq
   db:
-    image: postgres
+    image: mysql:5
     ports:
-      - "5432:5432"
+      - "5432:3306"
+    command: mysqld --default-authentication-plugin=mysql_native_password
     environment:
-      POSTGRES_PASSWORD: root
-      POSTGRES_USER: root
-      POSTGRES_DB: hyrax
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_PASSWORD: root
+      MYSQL_DATABASE: hyrax
     volumes:
-      - pgdata:/var/lib/postgresql/data
+      - mysqldata:/var/lib/mysql
   fcrepo_db:
     image: mysql:5
     ports:
@@ -92,7 +93,7 @@ volumes:
   fcrepo:
   fcrepo_db:
   gems:
-  pgdata:
+  mysqldata:
   redis:
   solr:
 networks:
