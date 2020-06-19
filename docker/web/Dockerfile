@@ -10,19 +10,19 @@ RUN yum update -y && \
     nodejs \
     unzip \
     ghostscript \
-    libmagickcore-dev \
+    ImageMagick \
+    ImageMagick-devel \
     mediainfo \
     clamav \
     libclamav-dev \
-    ffmpeg \
     libreoffice \
     java-1.8.0-openjdk \
     java-1.8.0-openjdk-devel 
 
-# Fixes: https://unix.stackexchange.com/q/342403
-# RUN apt-get install -y --no-install-recommends \
-#    openjdk-8-jre-headless \
-#    ca-certificates-java
+# Install ffmpeg
+RUN cd /opt && wget https://johnvansickle.com/ffmpeg/builds/ffmpeg-git-i686-static.tar.xz
+RUN mkdir /opt/ffmpeg-git-i686-static && tar -xf /opt/ffmpeg-git-i686-static.tar.xz -C /opt/ffmpeg-git-i686-static --strip-components 1
+RUN ln -s /opt/ffmpeg-git-i686-static/ffmpeg /usr/bin/ffmpeg
 
 # Install Harvard's FITS tool
 ENV FITS_VERSION 1.0.5
