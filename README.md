@@ -10,16 +10,14 @@ This configuration should only be used for local development of a [Hyrax](https:
 
 ## Containers
 
-The compose file includes a `CAS` and `LDAP`. These containers are optional, to exclude just remove from the `docker-compose.yml` file.
-
-If using LDAP you will want to configure users and groups before building the containers. See the files in the `docker/ldap/bootstrap/ldif` directory.
+Includes seperate containers for each component of the stack.
 
 ## Usage
 
-To use this docker configuration just drop the contents of this repo in the
+To use this docker configuration just drop this repo in the
 root directory of your Hyrax app.
 
-Start a docker machine and run:
+Start a docker machine, navigate into ./hyrax-docker and run:
 
 ```
 docker-compose up -d
@@ -27,16 +25,15 @@ docker-compose up -d
 
 The default is to run the rails server on port 3000 of the docker machine.
 
-- Rails Server: [http://192.168.99.100:3000/]()
-- Solr: [http://192.168.99.100:8983/solr/]()
-- FCREPO: [http://192.168.99.100:8984/fcrepo/]()
-- CAS: [http://192.168.99.100:8080/]()
+- Rails Server: [localhost:3000/]()
+- Solr: [localhost:8983/solr/]()
+- FCREPO: [localhost:8984/fcrepo/]()
 
 ## Hyrax Configuration
 
 See the `default_config` directory for default config files.
 
-Requires the `pg` gem. Add `gem 'pg'` to `Gemfile`.
+Requires the `mysql2` gem. Add `gem 'mysql2'` to `Gemfile`.
 
 Set the `fits_path` in `config/initializers/hyrax.rb`:
 
