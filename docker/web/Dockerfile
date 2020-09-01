@@ -1,4 +1,4 @@
-FROM centos/ruby-26-centos7
+FROM centos/ruby-27-centos7
 RUN whoami
 USER root
 
