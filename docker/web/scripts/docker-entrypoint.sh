@@ -22,6 +22,9 @@ if [ "$1" = 'server' ]; then
         rm -rf /opt/hyrax/tmp/pids/server.pid
     fi
 
+    echo "Copy over Docker env variables"
+    /bin/cp -f .env.development.docker .env.development
+
     echo "Install bundler"
     gem install bundler:2.0.2
 
@@ -57,6 +60,9 @@ elif [[ $1 = sidekiq* ]]; then
         echo "Unable to connect to the rails server."
         exit 1
     fi
+
+    echo "Copy over Docker env variables"
+    /bin/cp -f .env.development.docker .env.development
 
     echo "Install bundler"
     gem install bundler:2.0.2
