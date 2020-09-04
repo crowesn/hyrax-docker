@@ -13,6 +13,7 @@ RUN yum update -y && \
     ImageMagick \
     ImageMagick-devel \
     mediainfo \
+    file \
     clamav \
     libclamav-dev \
     libreoffice \
