@@ -59,6 +59,14 @@ services:
       interval: 30s
       timeout: 30s
       retries: 5
+  cantaloupe:
+    build: docker/cantaloupe
+    ports:
+      - "8182:8182"
+    volumes:
+      - cantaloupe:/var/
+    depends_on:
+      - fcrepo
   db_test:
     image: postgres
     ports:
@@ -90,6 +98,7 @@ services:
     volumes:
       - fcrepo:/opt/fcrepo/data
 volumes:
+  cantaloupe:
   fcrepo:
   fcrepo_db:
   gems:
