@@ -67,14 +67,6 @@ services:
       - cantaloupe:/var/
     depends_on:
       - fcrepo
-  db_test:
-    image: postgres
-    ports:
-      - "5433:5432"
-    environment:
-      POSTGRES_PASSWORD: root
-      POSTGRES_USER: root
-      POSTGRES_DB: hyrax
   redis:
     image: redis
     command: redis-server --appendonly yes
