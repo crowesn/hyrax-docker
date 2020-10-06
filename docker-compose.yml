@@ -9,7 +9,6 @@ services:
       - ..:/opt/hyrax
       - gems:/opt/bundle
     depends_on:
-      - db_test
       - redis
       - fcrepo
       - solr

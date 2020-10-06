@@ -112,7 +112,8 @@ endpoint.api.secret =
 
 # Uses one source for all requests. Available values are `FilesystemSource`,
 # `HttpSource`, `JdbcSource`, `S3Source`, and `AzureStorageSource`.
-source.static = $SOURCE_STATIC
+# source.static = $SOURCE_STATIC
+source.static = HttpSource
 
 # If true, `source.static` will be overridden, and the `source()` delegate
 # method will be used to select a source per-request.
@@ -140,7 +141,7 @@ FilesystemSource.BasicLookupStrategy.path_suffix =
 #----------------------------------------
 
 # Trusts insecure certificates and cipher suites.
-HttpSource.allow_insecure = false
+HttpSource.allow_insecure = true
 
 # Request timeout in seconds.
 HttpSource.request_timeout =
@@ -148,7 +149,7 @@ HttpSource.request_timeout =
 # Tells HttpSource how to look up resources. Allowed values are
 # `BasicLookupStrategy` and `ScriptLookupStrategy`. ScriptLookupStrategy
 # uses a delegate method for dynamic lookups; see the user manual.
-#HttpSource.lookup_strategy = BasicLookupStrategy
+HttpSource.lookup_strategy = ScriptLookupStrategy
 
 # URL that will be prefixed to the identifier in the request URL.
 # Trailing slash is important!

@@ -14,9 +14,8 @@ require 'cgi'
 # Cantaloupe 4.
 #
 class CustomDelegate
-
   def logger
-    @logger ||= Logger.new("/var/log/cantaloupe/output.log")
+    @logger ||= Logger.new('/var/log/cantaloupe/output.log')
     @logger.level = Logger::DEBUG
     @logger
   end
@@ -91,7 +90,7 @@ class CustomDelegate
   # @param options [Hash] Empty hash.
   # @return [Boolean,Hash<String,Object>] See above.
   #
-  def authorize(options = {})
+  def authorize(_options = {})
     true
   end
 
@@ -103,22 +102,20 @@ class CustomDelegate
   # @return [Hash] Hash that will be merged into an IIIF Image API 2.x
   #                information response. Return an empty hash to add nothing.
   #
-  def extra_iiif2_information_response_keys(options = {})
-=begin
-    Example:
-    {
-        'attribution' =>  'Copyright My Great Organization. All rights '\
-                          'reserved.',
-        'license' =>  'http://example.org/license.html',
-        'logo' =>  'http://example.org/logo.png',
-        'service' => {
-            '@context' => 'http://iiif.io/api/annex/services/physdim/1/context.json',
-            'profile' => 'http://iiif.io/api/annex/services/physdim',
-            'physicalScale' => 0.0025,
-            'physicalUnits' => 'in'
-        }
-    }
-=end
+  def extra_iiif2_information_response_keys(_options = {})
+    #     Example:
+    #     {
+    #         'attribution' =>  'Copyright My Great Organization. All rights '\
+    #                           'reserved.',
+    #         'license' =>  'http://example.org/license.html',
+    #         'logo' =>  'http://example.org/logo.png',
+    #         'service' => {
+    #             '@context' => 'http://iiif.io/api/annex/services/physdim/1/context.json',
+    #             'profile' => 'http://iiif.io/api/annex/services/physdim',
+    #             'physicalScale' => 0.0025,
+    #             'physicalUnits' => 'in'
+    #         }
+    #     }
     {}
   end
 
@@ -128,8 +125,7 @@ class CustomDelegate
   # @param options [Hash] Empty hash.
   # @return [String] Source name.
   #
-  def source(options = {})
-  end
+  def source(options = {}); end
 
   ##
   # N.B.: this method should not try to perform authorization. `authorize()`
@@ -139,8 +135,7 @@ class CustomDelegate
   # @return [String,nil] Blob key of the image corresponding to the given
   #                      identifier, or nil if not found.
   #
-  def azurestoragesource_blob_key(options = {})
-  end
+  def azurestoragesource_blob_key(options = {}); end
 
   ##
   # N.B.: this method should not try to perform authorization. `authorize()`
@@ -150,8 +145,7 @@ class CustomDelegate
   # @return [String,nil] Absolute pathname of the image corresponding to the
   #                      given identifier, or nil if not found.
   #
-  def filesystemsource_pathname(options = {})
-  end
+  def filesystemsource_pathname(options = {}); end
 
   ##
   # Returns one of the following:
@@ -177,12 +171,12 @@ class CustomDelegate
     paths = file_id.split(/(.{0,2})/).reject!(&:empty?)[0, 4]
 
     # fedora_base_url = ENV['FEDORA_URL'] + ENV['FEDORA_BASE_PATH']
-    fedora_base_url = "http://localhost:8080/fedora/rest/prod"
+    fedora_base_url = 'http://fcrepo:8984/fcrepo/rest/dev'
 
     ## DCE: Add CGI Unescape
     url = fedora_base_url + '/' + paths.join('/') + '/' + file_id
-    require "cgi"
-    CGI::unescape(url)
+    require 'cgi'
+    CGI.unescape(url)
   end
 
   ##
@@ -193,8 +187,7 @@ class CustomDelegate
   # @return [String] Identifier of the image corresponding to the given
   #                  identifier in the database.
   #
-  def jdbcsource_database_identifier(options = {})
-  end
+  def jdbcsource_database_identifier(options = {}); end
 
   ##
   # Returns either the media (MIME) type of an image, or an SQL statement that
@@ -206,16 +199,14 @@ class CustomDelegate
   # @param options [Hash] Empty hash.
   # @return [String, nil]
   #
-  def jdbcsource_media_type(options = {})
-  end
+  def jdbcsource_media_type(options = {}); end
 
   ##
   # @param options [Hash] Empty hash.
   # @return [String] SQL statement that selects the BLOB corresponding to the
   #                  value returned by `jdbcsource_database_identifier()`.
   #
-  def jdbcsource_lookup_sql(options = {})
-  end
+  def jdbcsource_lookup_sql(options = {}); end
 
   ##
   # N.B.: this method should not try to perform authorization. `authorize()`
@@ -225,8 +216,7 @@ class CustomDelegate
   # @return [Hash<String,Object>,nil] Hash containing `bucket` and `key` keys;
   #                                   or nil if not found.
   #
-  def s3source_object_info(options = {})
-  end
+  def s3source_object_info(options = {}); end
 
   ##
   # Tells the server what overlay, if any, to apply to an image in response
@@ -245,8 +235,7 @@ class CustomDelegate
   #         `stroke_color`, and `stroke_width` keys.
   #         Return nil for no overlay.
   #
-  def overlay(options = {})
-  end
+  def overlay(options = {}); end
 
   ##
   # Tells the server what regions of an image to redact in response to a
@@ -258,9 +247,7 @@ class CustomDelegate
   #         `width`, and `height` keys; or an empty array if no redactions are
   #         to be applied.
   #
-  def redactions(options = {})
+  def redactions(_options = {})
     []
   end
-
 end
-
