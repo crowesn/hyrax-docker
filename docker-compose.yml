@@ -9,7 +9,6 @@ services:
       - ..:/opt/hyrax
       - gems:/opt/bundle
     depends_on:
-      - db_test
       - redis
       - fcrepo
       - solr
@@ -59,14 +58,14 @@ services:
       interval: 30s
       timeout: 30s
       retries: 5
-  db_test:
-    image: postgres
+  cantaloupe:
+    build: docker/cantaloupe
     ports:
-      - "5433:5432"
-    environment:
-      POSTGRES_PASSWORD: root
-      POSTGRES_USER: root
-      POSTGRES_DB: hyrax
+      - "8182:8182"
+    volumes:
+      - cantaloupe:/var/
+    depends_on:
+      - fcrepo
   redis:
     image: redis
     command: redis-server --appendonly yes
@@ -90,6 +89,7 @@ services:
     volumes:
       - fcrepo:/opt/fcrepo/data
 volumes:
+  cantaloupe:
   fcrepo:
   fcrepo_db:
   gems:
