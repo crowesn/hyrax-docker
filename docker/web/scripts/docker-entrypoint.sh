@@ -18,7 +18,7 @@ if [ "$1" = 'server' ]; then
 
     if [ -f /opt/hyrax/tmp/pids/server.pid ]; then
         echo "Stopping Rails Server and Removing PID File"
-        ps aux |grep -i [r]ails | awk '{print $2}' | xargs kill -9
+        pkill -9 rails
         rm -rf /opt/hyrax/tmp/pids/server.pid
     fi
 
